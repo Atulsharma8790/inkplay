@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
-import { BookOpen, Eye, EyeOff } from 'lucide-react'
+import { Headphones, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
 
 export default function LoginPage() {
@@ -34,27 +34,30 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-      <div className="card" style={{ width: '100%', maxWidth: 400, padding: '36px 32px' }}>
+    <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', position: 'relative' }}>
+      {/* Background glow */}
+      <div style={{ position: 'fixed', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: 500, height: 400, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+      <div className="glass" style={{ width: '100%', maxWidth: 400, padding: '40px 36px', position: 'relative' }}>
         {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          <div style={{ width: 48, height: 48, borderRadius: 14, background: 'linear-gradient(135deg,#c9a84c,#8a6f30)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
-            <BookOpen size={24} color="#0f0a05" strokeWidth={2.5} />
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <div style={{ width: 52, height: 52, borderRadius: 16, background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px', boxShadow: '0 8px 24px rgba(124,58,237,0.4)' }}>
+            <Headphones size={26} color="#fff" strokeWidth={2.2} />
           </div>
-          <h1 style={{ fontSize: 22, color: 'var(--text)', marginBottom: 4 }}>
+          <h1 style={{ fontSize: 22, marginBottom: 5 }}>
             {mode === 'login' ? 'Welcome back' : 'Join InkPlay'}
           </h1>
-          <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)', WebkitTextFillColor: 'var(--text-muted)' }}>
             {mode === 'login' ? 'Sign in to your library' : 'Start your free audiobook journey'}
           </p>
         </div>
 
         {success ? (
-          <div style={{ background: 'var(--green-dim)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 10, padding: '14px 16px', color: '#86efac', fontSize: 13, textAlign: 'center' }}>
-            {success}
+          <div style={{ background: 'var(--green-dim)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: 10, padding: '16px', color: '#6ee7b7', fontSize: 13, textAlign: 'center', lineHeight: 1.5 }}>
+            ✓ {success}
           </div>
         ) : (
-          <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {mode === 'signup' && (
               <div>
                 <label className="label">Display Name</label>
@@ -75,19 +78,26 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {error && <p style={{ fontSize: 12, color: '#fca5a5', background: 'var(--red-dim)', padding: '8px 12px', borderRadius: 8 }}>{error}</p>}
+            {error && <p style={{ fontSize: 12, color: '#fca5a5', background: 'var(--red-dim)', padding: '10px 12px', borderRadius: 8, border: '1px solid rgba(239,68,68,0.2)' }}>{error}</p>}
 
-            <button type="submit" disabled={loading} className="btn btn-gold" style={{ marginTop: 4 }}>
-              {loading ? <span className="spin" style={{ width: 16, height: 16, border: '2px solid rgba(15,10,5,0.3)', borderTopColor: '#0f0a05', borderRadius: '50%', display: 'inline-block' }} /> : mode === 'login' ? 'Sign In' : 'Create Account'}
+            <button type="submit" disabled={loading} className="btn btn-gold" style={{ marginTop: 4, fontSize: 15, padding: '12px' }}>
+              {loading
+                ? <span className="spin" style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', display: 'inline-block' }} />
+                : mode === 'login' ? 'Sign In' : 'Create Account'
+              }
             </button>
           </form>
         )}
 
-        <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-muted)', marginTop: 20 }}>
+        <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-muted)', marginTop: 22 }}>
           {mode === 'login' ? "Don't have an account? " : 'Already have an account? '}
-          <button onClick={() => { setMode(m => m === 'login' ? 'signup' : 'login'); setError('') }} style={{ background: 'none', border: 'none', color: 'var(--gold)', cursor: 'pointer', fontWeight: 600 }}>
+          <button onClick={() => { setMode(m => m === 'login' ? 'signup' : 'login'); setError('') }} style={{ background: 'none', border: 'none', color: 'var(--violet-light)', cursor: 'pointer', fontWeight: 600, fontSize: 13 }}>
             {mode === 'login' ? 'Sign up free' : 'Sign in'}
           </button>
+        </p>
+
+        <p style={{ textAlign: 'center', marginTop: 16 }}>
+          <Link href="/" style={{ fontSize: 12, color: 'var(--text-dim)', textDecoration: 'none' }}>← Back to home</Link>
         </p>
       </div>
     </div>
