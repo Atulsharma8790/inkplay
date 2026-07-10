@@ -19,10 +19,10 @@ export function Navbar() {
     <header style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
       height: 'var(--nav-h)',
-      background: 'rgba(5,7,15,0.88)',
+      background: 'rgba(1,12,7,0.9)',
       backdropFilter: 'blur(20px)',
       WebkitBackdropFilter: 'blur(20px)',
-      borderBottom: '1px solid rgba(139,92,246,0.12)',
+      borderBottom: '1px solid rgba(16,185,129,0.12)',
     }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 20px', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
@@ -30,48 +30,45 @@ export function Navbar() {
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
           <div style={{
             width: 34, height: 34, borderRadius: 10,
-            background: 'linear-gradient(135deg, #7c3aed, #a78bfa)',
+            background: 'linear-gradient(135deg, #059669, #10b981)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 0 16px rgba(124,58,237,0.5)',
+            boxShadow: '0 0 16px rgba(16,185,129,0.45)',
           }}>
-            <Headphones size={17} color="#ffffff" strokeWidth={2.5} />
+            <Headphones size={17} color="#010c07" strokeWidth={2.5} />
           </div>
-          <span style={{ fontFamily: 'Georgia,serif', fontSize: 20, fontWeight: 700, background: 'linear-gradient(135deg,#a78bfa,#c4b5fd)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '-0.02em' }}>
-            Ink<span style={{ background: 'linear-gradient(135deg,#f59e0b,#fbbf24)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Play</span>
+          <span style={{ fontFamily: 'Georgia,serif', fontSize: 20, fontWeight: 700, letterSpacing: '-0.02em' }}>
+            <span style={{ background: 'linear-gradient(135deg,#34d399,#6ee7b7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Ink</span>
+            <span style={{ background: 'linear-gradient(135deg,#f59e0b,#fbbf24)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Play</span>
           </span>
         </Link>
 
         {/* Nav links */}
         <nav style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           {NAV.map(({ href, label, icon: Icon }) => {
-            const active = pathname.startsWith(href)
+            const active = pathname === href || pathname.startsWith(href + '/')
             return (
               <Link key={href} href={href} style={{
                 display: 'flex', alignItems: 'center', gap: 6,
-                padding: '6px 14px', borderRadius: 10,
-                fontSize: 13, fontWeight: 500, textDecoration: 'none',
-                background: active ? 'rgba(139,92,246,0.12)' : 'transparent',
-                color: active ? 'var(--violet-light)' : 'var(--text-muted)',
-                border: active ? '1px solid rgba(139,92,246,0.25)' : '1px solid transparent',
+                padding: '6px 14px', borderRadius: 10, fontSize: 13, fontWeight: 500, textDecoration: 'none',
+                background: active ? 'rgba(16,185,129,0.1)' : 'transparent',
+                color: active ? 'var(--emerald-light)' : 'var(--text-muted)',
+                border: active ? '1px solid rgba(16,185,129,0.22)' : '1px solid transparent',
                 transition: 'all .2s',
               }}>
-                <Icon size={15} />
-                {label}
+                <Icon size={15} />{label}
               </Link>
             )
           })}
           {profile?.is_admin && (
             <Link href="/admin" style={{
               display: 'flex', alignItems: 'center', gap: 6,
-              padding: '6px 14px', borderRadius: 10,
-              fontSize: 13, fontWeight: 500, textDecoration: 'none',
+              padding: '6px 14px', borderRadius: 10, fontSize: 13, fontWeight: 500, textDecoration: 'none',
               background: pathname.startsWith('/admin') ? 'rgba(245,158,11,0.1)' : 'transparent',
               color: pathname.startsWith('/admin') ? 'var(--gold-light)' : 'var(--text-muted)',
               border: pathname.startsWith('/admin') ? '1px solid rgba(245,158,11,0.2)' : '1px solid transparent',
               transition: 'all .2s',
             }}>
-              <Settings size={15} />
-              Admin
+              <Settings size={15} />Admin
             </Link>
           )}
         </nav>
@@ -82,24 +79,17 @@ export function Navbar() {
             {user ? (
               <>
                 <button onClick={() => setMenuOpen(p => !p)} style={{
-                  display: 'flex', alignItems: 'center', gap: 8,
-                  padding: '6px 12px', borderRadius: 10,
+                  display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', borderRadius: 10,
                   background: 'var(--bg-card)', border: '1px solid var(--border)',
-                  color: 'var(--text)', cursor: 'pointer', fontSize: 13,
-                  transition: 'border-color .2s',
+                  color: 'var(--text)', cursor: 'pointer', fontSize: 13, transition: 'border-color .2s',
                 }}>
-                  <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <User size={13} color="#fff" />
+                  <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg,#059669,#10b981)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <User size={13} color="#010c07" />
                   </div>
                   {profile?.display_name ?? 'You'}
                 </button>
                 {menuOpen && (
-                  <div style={{
-                    position: 'absolute', top: '110%', right: 0, minWidth: 160,
-                    background: 'var(--bg-elevated)', border: '1px solid var(--border)',
-                    borderRadius: 12, overflow: 'hidden', zIndex: 100,
-                    boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
-                  }}>
+                  <div style={{ position: 'absolute', top: '110%', right: 0, minWidth: 160, background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden', zIndex: 100, boxShadow: '0 20px 60px rgba(0,0,0,0.6)' }}>
                     <Link href="/profile" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', color: 'var(--text-muted)', fontSize: 13, textDecoration: 'none' }}>
                       <User size={14} /> Profile
                     </Link>

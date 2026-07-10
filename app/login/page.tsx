@@ -35,14 +35,12 @@ export default function LoginPage() {
 
   return (
     <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', position: 'relative' }}>
-      {/* Background glow */}
-      <div style={{ position: 'fixed', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: 500, height: 400, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'fixed', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: 500, height: 400, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(16,185,129,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
       <div className="glass" style={{ width: '100%', maxWidth: 400, padding: '40px 36px', position: 'relative' }}>
-        {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{ width: 52, height: 52, borderRadius: 16, background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px', boxShadow: '0 8px 24px rgba(124,58,237,0.4)' }}>
-            <Headphones size={26} color="#fff" strokeWidth={2.2} />
+          <div style={{ width: 52, height: 52, borderRadius: 16, background: 'linear-gradient(135deg,#059669,#10b981)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px', boxShadow: '0 8px 24px rgba(16,185,129,0.4)' }}>
+            <Headphones size={26} color="#010c07" strokeWidth={2.2} />
           </div>
           <h1 style={{ fontSize: 22, marginBottom: 5 }}>
             {mode === 'login' ? 'Welcome back' : 'Join InkPlay'}
@@ -53,7 +51,7 @@ export default function LoginPage() {
         </div>
 
         {success ? (
-          <div style={{ background: 'var(--green-dim)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: 10, padding: '16px', color: '#6ee7b7', fontSize: 13, textAlign: 'center', lineHeight: 1.5 }}>
+          <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: 10, padding: '16px', color: 'var(--emerald-bright)', fontSize: 13, textAlign: 'center', lineHeight: 1.5 }}>
             ✓ {success}
           </div>
         ) : (
@@ -82,22 +80,22 @@ export default function LoginPage() {
 
             <button type="submit" disabled={loading} className="btn btn-gold" style={{ marginTop: 4, fontSize: 15, padding: '12px' }}>
               {loading
-                ? <span className="spin" style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', display: 'inline-block' }} />
+                ? <span className="spin" style={{ width: 16, height: 16, border: '2px solid rgba(1,12,7,0.3)', borderTopColor: '#010c07', borderRadius: '50%', display: 'inline-block' }} />
                 : mode === 'login' ? 'Sign In' : 'Create Account'
               }
             </button>
           </form>
         )}
 
-        <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-muted)', marginTop: 22 }}>
+        <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-muted)', marginTop: 22, WebkitTextFillColor: 'var(--text-muted)' }}>
           {mode === 'login' ? "Don't have an account? " : 'Already have an account? '}
-          <button onClick={() => { setMode(m => m === 'login' ? 'signup' : 'login'); setError('') }} style={{ background: 'none', border: 'none', color: 'var(--violet-light)', cursor: 'pointer', fontWeight: 600, fontSize: 13 }}>
+          <button onClick={() => { setMode(m => m === 'login' ? 'signup' : 'login'); setError('') }} style={{ background: 'none', border: 'none', color: 'var(--emerald-light)', cursor: 'pointer', fontWeight: 600, fontSize: 13, WebkitTextFillColor: 'var(--emerald-light)' }}>
             {mode === 'login' ? 'Sign up free' : 'Sign in'}
           </button>
         </p>
 
         <p style={{ textAlign: 'center', marginTop: 16 }}>
-          <Link href="/" style={{ fontSize: 12, color: 'var(--text-dim)', textDecoration: 'none' }}>← Back to home</Link>
+          <Link href="/" style={{ fontSize: 12, color: 'var(--text-dim)', textDecoration: 'none', WebkitTextFillColor: 'var(--text-dim)' }}>← Back to home</Link>
         </p>
       </div>
     </div>
